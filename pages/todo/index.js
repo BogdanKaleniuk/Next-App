@@ -3,11 +3,11 @@ import { useState } from "react";
 
 const Todo = () => {
   const [todos, setTodos] = useState([
-    { id: 0, text: "Learn HTML and CSS", completed: true },
-    { id: 1, text: "Get good at JavaScript", completed: true },
-    { id: 2, text: "Master React", completed: false },
-    { id: 3, text: "Discover Redux", completed: false },
-    { id: 4, text: "Build amazing apps", completed: false },
+    { id: 0, text: "Learn HTML and CSS" },
+    { id: 1, text: "Get good at JavaScript" },
+    { id: 2, text: "Master React" },
+    { id: 3, text: "Discover Redux" },
+    { id: 4, text: "Build amazing apps" },
   ]);
   const [todoInput, setTodoInput] = useState("");
   //   const [todo, setTodo] = useState("");
@@ -18,19 +18,21 @@ const Todo = () => {
       {
         id: Date.now(),
         text: todoInput,
-        completed: false,
+        // completed: false,
       },
       ...todos,
     ]);
     setTodoInput("");
   };
+  console.log(todos);
 
   const deleteTodo = (id) => {
-    setTodos(
-      todos.filter((item) => {
-        return item.id !== id;
-      })
-    );
+    console.log(todos);
+    const newTodo = [...todos].filter((item) => {
+      return item.id !== id;
+    });
+    console.log(newTodo);
+    setTodos(newTodo);
   };
 
   const deleteTodoAllTodo = (id) => {
@@ -51,8 +53,10 @@ const Todo = () => {
       <div>
         {todos.map((todo, id) => (
           <div key={id}>
-            <p> {todo.text}</p>
-            <button onClick={deleteTodo}>Delete</button>
+            <p>
+              {todo.text}
+              <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            </p>
           </div>
         ))}
       </div>
