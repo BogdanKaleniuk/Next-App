@@ -5,22 +5,23 @@ import styles from "../styles/Home.module.scss";
 
 export const getStaticProps = async () => {
   try {
-    const response = await fetch(`${process.env.API_HOST}/socials`);
+    const response = await fetch("http://localhost:3000/api/socials");
     const data = await response.json();
-  
+
+    console.log("data", data);
     if (!data) {
       return {
         notFound: true,
-      }
+      };
     }
-  
+
     return {
       props: { socials: data },
-    }
+    };
   } catch {
     return {
       props: { socials: null },
-    }
+    };
   }
 };
 

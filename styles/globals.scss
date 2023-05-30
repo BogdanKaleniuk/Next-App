@@ -5,7 +5,7 @@ body {
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   background: linear-gradient(to bottom, #4e54c8, #8f94fb);
   color: #fff;
   font-size: 20px;
@@ -54,4 +54,14 @@ footer {
 a {
   color: #fff;
   text-decoration: none;
+}
+
+button {
+  background: #eff0ed;
+  border-radius: 3px;
+  border: 2px solid #6000fa;
+  color: #6c18f2;
+  margin: 15px 5px;
+  padding: 0.25em 1em;
+  cursor: pointer;
 }
