@@ -65,3 +65,19 @@ button {
   padding: 0.25em 1em;
   cursor: pointer;
 }
+
+button:hover {
+  border: 2px solid x #6bb339;
+  color: #6bb339;
+}
+
+.buttonYes {
+  color: #6b9e47;
+  background: #eff0ed;
+}
+
+.buttonNo {
+  color: #992400;
+  background: #eff0ed;
+  cursor: pointer;
+}

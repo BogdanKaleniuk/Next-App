@@ -18,7 +18,6 @@ const Todo = () => {
       {
         id: Date.now(),
         text: todoInput,
-        // completed: false,
       },
       ...todos,
     ]);
@@ -40,6 +39,17 @@ const Todo = () => {
     setTodos(newTodo);
   };
 
+  const statusTodo = (id) => {
+    const newTodo = [...todos].filter((todo) => {
+      if (todo.id === id) {
+        todo.status = !todo.status;
+      }
+
+      return todo;
+    });
+    setTodos(newTodo);
+  };
+
   return (
     <div>
       <button onClick={addTodo}>Add todo</button>
@@ -55,6 +65,14 @@ const Todo = () => {
           <div key={id}>
             <p>
               {todo.text}
+              <button onClick={() => statusTodo(todo.id)}>
+                {(todo.status = !todo.status) ? (
+                  <div className="buttonYes">Good!</div>
+                ) : (
+                  <div className="buttonNo">Completed?</div>
+                )}
+              </button>
+
               <button onClick={() => deleteTodo(todo.id)}>Delete</button>
             </p>
           </div>
