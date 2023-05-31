@@ -2,35 +2,31 @@ import React from "react";
 import { useState } from "react";
 
 const Todo = () => {
-  const [todos, setTodos] = useState([
-    { id: 0, text: "Learn HTML and CSS" },
-    { id: 1, text: "Get good at JavaScript" },
-    { id: 2, text: "Master React" },
-    { id: 3, text: "Discover Redux" },
-    { id: 4, text: "Build amazing apps" },
-  ]);
+  const [todos, setTodos] = useState([{ id: 0, text: "Test" }]);
   const [todoInput, setTodoInput] = useState("");
-  //   const [todo, setTodo] = useState("");
-  console.log(todoInput);
+  const [edit, setEdit] = useState(0);
+
+  const editTodo = (id) => {};
 
   const addTodo = (event) => {
-    setTodos([
-      {
-        id: Date.now(),
-        text: todoInput,
-      },
-      ...todos,
-    ]);
-    setTodoInput("");
+    if (todoInput !== "") {
+      setTodos([
+        {
+          id: Date.now(),
+          text: todoInput,
+        },
+        ...todos,
+      ]);
+      setTodoInput("");
+    } else alert("Пустий рядок");
+    return;
   };
-  console.log(todos);
 
   const deleteTodo = (id) => {
     console.log(todos);
     const newTodo = [...todos].filter((item) => {
       return item.id !== id;
     });
-    console.log(newTodo);
     setTodos(newTodo);
   };
 
@@ -59,7 +55,12 @@ const Todo = () => {
         type="text"
         onChange={(event) => setTodoInput(event.target.value)}
       />
-      <p>Todo list</p>
+      <h1>Todo list</h1>
+      <div className="countTodo">
+        <p className="countTodoItem">All todo: {todos.length}</p>
+        <p className="countTodoItem">Active: {todos.length.status}</p>
+        <p className="countTodoItem">Completed: 2</p>
+      </div>
       <div>
         {todos.map((todo, id) => (
           <div key={id}>
@@ -72,7 +73,7 @@ const Todo = () => {
                   <div className="buttonNo">Completed?</div>
                 )}
               </button>
-
+              <button onClick={() => editTodo(todo.id)}>Edit</button>
               <button onClick={() => deleteTodo(todo.id)}>Delete</button>
             </p>
           </div>

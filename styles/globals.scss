@@ -6,7 +6,7 @@ body {
 
 body {
   font-family: "Montserrat", sans-serif;
-  background: linear-gradient(to bottom, #4e54c8, #8f94fb);
+  background: linear-gradient(to bottom, #2d87fc, #34cbed);
   color: #fff;
   font-size: 20px;
 }
@@ -80,4 +80,12 @@ button:hover {
   color: #992400;
   background: #eff0ed;
   cursor: pointer;
+}
+
+.countTodo {
+  display: flex;
+}
+
+.countTodoItem {
+  margin: 10px;
 }
