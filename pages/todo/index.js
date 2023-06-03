@@ -4,9 +4,33 @@ import { useState } from "react";
 const Todo = () => {
   const [todos, setTodos] = useState([{ id: 0, text: "Test" }]);
   const [todoInput, setTodoInput] = useState("");
-  const [edit, setEdit] = useState(0);
+  const [edit, setEdit] = useState(null);
+  const [value, setValue] = useState("");
 
-  const editTodo = (id) => {};
+  const saveTodo = (id) => {
+    const newTodo = todos.map((item) =>
+      item.id === id ? { ...item, text: value } : item
+    );
+
+    setTodos(newTodo);
+
+    setEdit(null);
+
+    // const newTodo = [...todos].map((todo) => {
+    //   if (todo.id === id) {
+    //     todo.text === value;
+    //   }
+    //   return todo;
+    // });
+
+    // setTodos(newTodo);
+    // setEdit(null);
+  };
+
+  const editTodo = (id, text) => {
+    setEdit(id);
+    setValue(text);
+  };
 
   const addTodo = (event) => {
     if (todoInput !== "") {
@@ -48,34 +72,54 @@ const Todo = () => {
 
   return (
     <div>
-      <button onClick={addTodo}>Add todo</button>
-      <input
-        value={todoInput}
-        placeholder="Enter text"
-        type="text"
-        onChange={(event) => setTodoInput(event.target.value)}
-      />
+      <div>
+        <input
+          value={todoInput}
+          placeholder="Enter text"
+          onChange={(event) => setTodoInput(event.target.value)}
+        />
+        <button onClick={addTodo}>Add todo</button>
+      </div>
+
       <h1>Todo list</h1>
       <div className="countTodo">
         <p className="countTodoItem">All todo: {todos.length}</p>
-        <p className="countTodoItem">Active: {todos.length.status}</p>
-        <p className="countTodoItem">Completed: 2</p>
       </div>
       <div>
         {todos.map((todo, id) => (
-          <div key={id}>
-            <p>
-              {todo.text}
-              <button onClick={() => statusTodo(todo.id)}>
-                {(todo.status = !todo.status) ? (
-                  <div className="buttonYes">Good!</div>
-                ) : (
-                  <div className="buttonNo">Completed?</div>
-                )}
-              </button>
-              <button onClick={() => editTodo(todo.id)}>Edit</button>
-              <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-            </p>
+          <div key={id} className="todoList">
+            {edit === todo.id ? (
+              <div>
+                <input
+                  onChange={(e) => setValue(e.target.value)}
+                  value={value}
+                />
+              </div>
+            ) : (
+              <div> {todo.text}</div>
+            )}
+            {edit === todo.id ? (
+              <div>
+                <button onClick={() => saveTodo(todo.id, todo.text)}>
+                  Save
+                </button>
+              </div>
+            ) : (
+              <div>
+                <button onClick={() => statusTodo(todo.id)}>
+                  {(todo.status = !todo.status) ? (
+                    <div className="buttonYes">Good!</div>
+                  ) : (
+                    <div className="buttonNo">Completed?</div>
+                  )}
+                </button>
+                <button onClick={() => editTodo(todo.id, todo.text)}>
+                  Edit
+                </button>
+
+                <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+              </div>
+            )}
           </div>
         ))}
       </div>
